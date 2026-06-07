@@ -6,21 +6,21 @@ PK: id
 FK: campus		REFERENCES	Campus(nom, pays)
 
 Personne(matricule, nom, prenom, courriel)
-PK : matricule
+PK: matricule
 
-PersonnelAdministratif(matricule, fonction, nom:type, field:type)
+DetailsPersonne(
+    matricule,
+    noEtudiant,
+	parcours, ************* TODO: verify *******************	
+    statut,
+    grade,
+    fonction,
+    estEtudiant,
+    estEnseignant,
+    estPersonnelAdministratif
+)
 PK: matricule
 FK: matricule	REFERENCES	Personne(matricule)
-
-Etudiant(matricule, noEtudiant, parcours)
-PK: matricule, noEtudiant
-FK: matricule	REFERENCES	Personne(matricule)
-	parcours	REFERENCES	Parcours(id)
-
-Enseignant(matricule, statut, grade, field:type)
-PK: matricule
-FK: matricule	REFERENCES	Personne(matricule)
-
 
 Evaluation(id, module, type, coefficient)
 PK: id
