@@ -1,0 +1,56 @@
+Campus(nom, pays)
+PK: nom, pays
+
+StructureAcademique(id, nom, type(depart;faculte), campus)
+PK: id
+FK: campus		REFERENCES	Campus(nom, pays)
+
+Personne(matricule, nom, prenom, courriel)
+PK : matricule
+
+PersonnelAdministratif(matricule, fonction, nom:type, field:type)
+PK: matricule
+FK: matricule	REFERENCES	Personne(matricule)
+
+Etudiant(matricule, noEtudiant, parcours)
+PK: matricule, noEtudiant
+FK: matricule	REFERENCES	Personne(matricule)
+	parcours	REFERENCES	Parcours(id)
+
+Enseignant(matricule, statut, grade, field:type)
+PK: matricule
+FK: matricule	REFERENCES	Personne(matricule)
+
+
+Evaluation(id, module, type, coefficient)
+PK: id
+FK: module		REFERENCES	Module(id)
+
+Note(noteObtenue, noEtudiant, eval)
+PK: noEtudiant, eval
+FK: noEtudiant 	REFERENCES Etudiant(noEtudiant)
+	eval		REFERENCES Evaluation(id)
+
+Module(id,libelle,nCredits)
+PK: id
+	
+PriseChargeModule(personne, module, responsable, annee, campus, chargeHoraire)
+PK: personne, module
+FK: personne 	REFERENCES	Personne(matricule)
+	module		REFERENCES	Module(id)
+	
+ParcoursModule(parcours,module,obligatoire)
+PK: parcours, module
+FK: parcours	REFERENCES	Parcours(id)
+	module		REFERENCES	Module(id)
+
+Parcours(id, nom, formation)
+PK: id
+FK: formation	REFERENCES	Formation(id)
+
+Formation(id, nom, diplome)
+PK: id
+FK: diplome		REFERENCES	Diplome(intitule)
+
+Diplome(intitule, niveau)
+PK: intitule
